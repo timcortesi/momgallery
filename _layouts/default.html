@@ -83,12 +83,11 @@
     <script src="{{ site.rootpath }}/assets/js/jquery.autocomplete.js" type="text/javascript" crossorigin="anonymous"></script>
     <script>
       var images = [
-        {% for page in site.pages %}{% for image in pages.images %}{% if image.title != blank %}{
+        {% for page in site.pages %}{% for image in page.images %}{% if image.title != blank %}{
           "url":`{{ page.url }}#{{ forloop.index }}{{ image.title | slugify }}`,
           "value":`{{ image.title }} ({{ page.title }})` 
         },{% endif %}{% endfor %}{% endfor %}
-        ];
-      ]
+      ];
       $('.image_search').autocomplete({
           lookup: images,
           onSelect: function (suggestion) {
