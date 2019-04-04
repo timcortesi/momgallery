@@ -16,3 +16,4 @@ plugins:
   - jekyll-avatar
   - jekyll-include-cache
 url: https://timcortesi.github.com/momgallery
+rootpath: /momgallery
