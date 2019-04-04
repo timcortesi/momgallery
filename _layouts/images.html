@@ -28,7 +28,8 @@ layout: default
             <div class="modal-body">
                 <p>{{ image.description }}</p>
                 {% for file in image.files %}
-                    <p>{{ site.url }}/images/{{ page.title | slugify}}/{{ file }}</p>
+                    <p><img src="{{ site.url }}/images/{{ page.title | slugify}}/{{ file }}"></p>
+                    <p><a href="{{ site.url }}/images/{{ page.title | slugify}}/{{ file }}">{{ site.url }}/images/{{ page.title | slugify}}/{{ file }}</a></p>
                 {% endfor %}
             </div>
             <div class="modal-footer">
