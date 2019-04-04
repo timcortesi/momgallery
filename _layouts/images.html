@@ -1,0 +1,19 @@
+--- 
+layout: default
+---
+
+{{ content }}
+
+<div class="row">
+    {% for image in page.images %}
+    <div class="col-lg-4 col-sm-6">
+        <a class="card" href="{{ site.url }}{{ recipe.url }}" style="margin-bottom:20px;">
+            <img class="card-img-top" src="https://awvdvowren.cloudimg.io/crop/300x300/x/{{ site.url }}/images/{{ page.title | slugify}}/{{ image.files[0] }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ image.title }}</h5>
+                <p class="card-text">{{ image.description }}</p>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+  </div>
