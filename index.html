@@ -3,14 +3,15 @@ title: "Welcome to Susan Cortesi's Gallery!"
 layout: default
 ---
 {% for page in site.pages %}
-  {% if page.title == 'Quilts'}
-    {% assign quilt_img = page.images[0] }
-  {% elseif page.title == 'Paintings'}
-    {% assign painting_img = page.images[0] }
-  {% elseif page.title == 'Photos'}
-    {% assign photo_img = page.images[0] }
-  {% endif %}
+    {% if page.title == 'Quilts'}
+        {% assign quilt_img = page.images[0] }
+    {% elsif page.title == 'Paintings'}
+        {% assign painting_img = page.images[0] }
+    {% elsif page.title == 'Photos'}
+        {% assign photo_img = page.images[0] }
+    {% endif %}
 {% endfor %}
+
 <form class="form-group">
     <input class="form-control mr-sm-2 image_search" type="search" placeholder="Search Images" aria-label="Search Images">
 </form>
