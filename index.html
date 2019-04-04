@@ -1,27 +1,7 @@
 ---
-title: "Welcome to CortesiFood.com!"
+title: "Welcome to Susan Cortesi's Gallery!"
 layout: default
 ---
-
-{% assign recipes_with_images = "" | split: ',' %}
-{% for mypage in site.pages %}
-    {% assign num_images = mypage.images | size %}
-    {% if num_images > 0 %}
-        {% assign recipes_with_images = recipes_with_images | push: mypage %}
-    {% endif %}
-{% endfor %}
-
-{% assign min = 0 %}
-{% assign max = recipes_with_images.size %}
-{% assign diff = max | minus: min %}
-
-{% assign first_recipes = "" | split: ',' %}
-{% assign first_rand = "now" | date: "%N" | modulo: diff | plus: min %}
-{% assign first_recipes = first_recipes | push: recipes_with_images[first_rand] %}
-{% assign second_rand = "now" | date: "%N" | modulo: diff | plus: min %}
-{% assign first_recipes = first_recipes | push: recipes_with_images[second_rand] %}
-{% assign third_rand = "now" | date: "%N" | modulo: diff | plus: min %}
-{% assign first_recipes = first_recipes | push: recipes_with_images[third_rand] %}
 
 <style>
 a.card {
@@ -33,18 +13,16 @@ a.card:hover {
 }
 </style>
 <form class="form-group">
-    <input class="form-control mr-sm-2 recipe_search" type="search" placeholder="Search Recipes" aria-label="Search Recipes">
+    <input class="form-control mr-sm-2 image_search" type="search" placeholder="Search Images" aria-label="Search Images">
 </form>
 <div class="row">
-    {% for recipe in first_recipes %}
     <div class="col-lg-4 col-sm-6">
-        <a class="card" href="{{ site.url }}{{ recipe.url }}" style="margin-bottom:20px;">
-            <img class="card-img-top" src="images/{{ recipe.images | slice:0 }}">
+        <a class="card" href="{{ site.url }}/quilts.html" style="margin-bottom:20px;">
+            <img class="card-img-top" src="images/quilts/apple-pie.jpg">
             <div class="card-body">
-                <h5 class="card-title">{{ recipe.title }}</h5>
-                <p class="card-text">{{ recipe.content | strip_html | slice:0,150 }} ...</p>
+                <h5 class="card-title">Quilts</h5>
+                <p class="card-text">Here are some quilts</p>
             </div>
         </a>
     </div>
-    {% endfor %}
 </div>

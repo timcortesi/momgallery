@@ -1,14 +1,4 @@
 <!doctype html>
-{% assign all_categories = "" | split: ',' %}
-{% assign all_ingredients = "" | split: ',' %}
-{% for mypage in site.pages %}
-  {% for mycategory in mypage.categories %}
-    {% assign all_categories = all_categories | push: mycategory | uniq | sort %}
-  {% endfor %}
-  {% for myingredient in mypage.ingredients %}
-    {% assign all_ingredients = all_ingredients | push: myingredient | uniq | sort %}
-  {% endfor %}
-{% endfor %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -44,27 +34,17 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Categories
+              Visit
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="height: auto; max-height: 400px; overflow-x: hidden;">
-              {% for category in all_categories %}
-                <a class="dropdown-item" href="{{ site.url }}/categories#{{ category | slugify }}">{{ category }}</a>
-              {% endfor %}
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Ingredients
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="height: auto; max-height: 400px; overflow-x: hidden;">
-              {% for ingredient in all_ingredients %}
-                <a class="dropdown-item" href="{{ site.url }}/ingredients#{{ ingredient | slugify }}">{{ ingredient }}</a>
-              {% endfor %}
+                <a class="dropdown-item" href="{{ site.url }}/quilts.html">Quilts</a>
+                <a class="dropdown-item" href="{{ site.url }}/paintings.html">Paintings</a>
+                <a class="dropdown-item" href="{{ site.url }}/photos.html">Photos</a>
             </div>
           </li>
         </ul>
         <form class="form-inline">
-          <input class="form-control mr-sm-2 recipe_search" type="search" placeholder="Search Recipes" aria-label="Search Recipes">
+          <input class="form-control mr-sm-2 image_search" type="search" placeholder="Search" aria-label="Search">
         </form>
       </div>
     </nav>
@@ -76,23 +56,13 @@
             <div class="card-header">
               <form>
                 <div class="form-group" style="margin:0px;">
-                  <input type="text" class="form-control recipe_search" placeholder="Search Recipes">
+                  <input type="text" class="form-control image_search" placeholder="Search Images">
                 </div>
               </form>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                {% for category in all_categories %}
-                  <a class="badge badge-info" href="{{ site.url }}/categories#{{ category | slugify }}">{{ category }}</a>
-                {% endfor %}
-              </li>
-              <li class="list-group-item">
-                {% for ingredient in all_ingredients %}
-                  <a class="badge badge-info" href="{{ site.url }}/ingredients#{{ ingredient | slugify }}">{{ ingredient }}</a>
-                {% endfor %}
-              </li>
               <li class="list-group-item" style="padding: 0px;">
-                <a class="badge badge-danger" href="https://github.com/timcortesi/cortesifood/edit/master/{{ page.path }}" style="width:100%;font-size:20px;border-top-left-radius:0;border-top-right-radius:0;">
+                <a class="badge badge-danger" href="https://github.com/timcortesi/momgallery/edit/master/{{ page.path }}" style="width:100%;font-size:20px;border-top-left-radius:0;border-top-right-radius:0;">
                   Edit This Page
                 </a>
               </li>
@@ -101,38 +71,8 @@
         </div>
         <div class="col-md-8 col-lg-9">
           <h1>{% if page.title == blank %} {{ page.name }} {% else %} {{ page.title }} {% endif %}</h1>
-          {% if page.images | pop != blank and page.images | pop != "" %}
-          <div style="float:right;padding:20px 0px 0px 20px;width:320px;" class="d-none d-lg-block">
-            {% for image in page.images %}
-              <img style="width:300px;padding-bottom:20px;"src="{{ site.url }}/images/{{ image }}">
-            {% endfor %}
-          </div>
-          {% endif %}
           <section>
             {{ content }}
-
-            <!-- Small Screen Images -->
-            <div class="row">
-              <div class="col-sm-12 d-md-block d-lg-none">
-                {% for image in page.images %}
-                  <img style="width:160px;" style="padding:10px;" src="{{ site.url }}/images/{{ image }}">
-                {% endfor %}
-              </div>
-            </div>
-            <!-- End Small Screen Images -->
-
-            <!-- Begin Categories -->
-            <div class="row">
-              <div class="col-sm-12">
-                  {% for category in page.categories %}
-                    <span class="badge badge-primary">{{ category }}</span>
-                  {% endfor %}
-                  {% for ingredients in page.ingredients %}
-                    <span class="badge badge-primary">{{ ingredients }}</span>
-                  {% endfor %}
-              </div>
-            </div>
-            <!-- End Categories -->
           </section>
         </div>
       </div>
@@ -146,22 +86,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="{{ site.url }}/assets/js/jquery.autocomplete.js"></script>
     <script>
-      var recipes = [
-      {% for page in site.pages %}{% if page.dir == "/recipes/" %}{
-        "url":`{{ page.url }}`,
-        "value":{% if page.title == blank %} `{{ page.name }}` {% else %} `{{ page.title }}` {% endif %}
-      },{% endif %}{% endfor %}
-      {% for category in all_categories %}{
-        "url":`/categories#{{ category | slugify }}`,
-        "value":`{{ category }}`
-      },{% endfor %}
-      {% for ingredient in all_ingredients %}{
-        "url":`/ingredients#{{ ingredient | slugify }}`,
-        "value":`{{ ingredient }}`
-      },{% endfor %}
-      ];
-      $('.recipe_search').autocomplete({
-          lookup: recipes,
+      var images = []
+      $('.image_search').autocomplete({
+          lookup: images,
           onSelect: function (suggestion) {
               window.location = "{{ site.url }}"+suggestion.url
           }
