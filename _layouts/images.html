@@ -7,13 +7,14 @@ layout: default
 <div class="row">
     {% for image in page.images %}
     <div class="col-lg-4 col-sm-6">
-        <a name="{{ forloop.index }}{{ image.title | slugify }}" class="card anchor" data-toggle="modal" data-target="#modal-{{ forloop.index }}" style="margin-bottom:20px;">
+        <a name="{{ forloop.index }}{{ image.title | slugify }}" class="anchor"></a>
+        <div class="card" data-toggle="modal" data-target="#modal-{{ forloop.index }}" style="margin-bottom:20px;">
             <img class="card-img-top" src="https://awvdvowren.cloudimg.io/crop/300x300/x/{{ site.url }}/images/{{ page.title | slugify}}/{{ image.files[0] }}">
             <div class="card-body">
                 <h5 class="card-title">{{ image.title }}</h5>
                 <p class="card-text">{{ image.description }}</p>
             </div>
-        </a>
+        </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="modal-{{ forloop.index }}" tabindex="-1" role="dialog">
