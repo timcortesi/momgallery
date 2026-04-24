@@ -10,7 +10,7 @@ layout: default
         <a name="{{ forloop.index }}{{ image.title | slugify }}" class="anchor"></a>
         <div class="card" data-toggle="modal" data-target="#modal-{{ forloop.index }}" style="margin-bottom:20px;">
             <!-- <img class="card-img-top" src="https://awvdvowren.cloudimg.io/crop/300x300/x/{{ site.url }}/images/{{ page.title | slugify}}/{{ image.files[0] }}"> -->
-            <img class="card-img-top" src="{{ image.files[0] }}">
+            <img class="card-img-top" src="{{ site.url }}/images/{{ page.title | slugify}}/{{ image.files[0] }}">
             <div class="card-body">
                 <h5 class="card-title">{{ image.title }}</h5>
                 <p class="card-text">{{ image.description }}</p>
@@ -30,8 +30,7 @@ layout: default
             <div class="modal-body">
                 <p>{{ image.description }}</p>
                 {% for file in image.files %}
-                    <!-- <p><img style="width:100%;" src="{{ site.url }}/images/{{ page.title | slugify}}/{{ file }}"></p> -->
-                    <p><img style="width:100%;" src="{{ file }}"></p>
+                    <p><img style="width:100%;" src="{{ site.url }}/images/{{ page.title | slugify}}/{{ file }}"></p>
                     <p><a target="_blank" href="{{ site.url }}/images/{{ page.title | slugify}}/{{ file }}">{{ site.url }}/images/{{ page.title | slugify}}/{{ file }}</a></p>
                 {% endfor %}
             </div>
